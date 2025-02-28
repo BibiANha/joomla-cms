@@ -1,0 +1,141 @@
+## **Estructura de la Carpeta `templates`**
+
+En Joomla 5.2, la carpeta `templates` contiene dos plantillas principales:
+
+### **1. `cassiopeia`**  
+   - **Función**: Plantilla predeterminada para el **frontend** (la parte visible del sitio).  
+   - **Ruta**: `templates/cassiopeia/`  
+   - **URL en tu repositorio**: [https://github.com/BibiANha/joomla-cms/tree/5.2-dev/templates/cassiopeia](https://github.com/BibiANha/joomla-cms/tree/5.2-dev/templates/cassiopeia)  
+
+#### **Contenido clave**:
+   - **`index.php`**: Archivo principal que define la estructura HTML de la plantilla.
+   - **`templateDetails.xml`**: Define metadatos, archivos incluidos, posiciones de módulos y configuraciones de la plantilla.
+   - **`css/`**: Contiene los archivos CSS que estilizan el sitio.
+   - **`js/`**: Incluye scripts JavaScript para funcionalidades dinámicas.
+   - **`images/`**: Almacena imágenes utilizadas en la plantilla.
+   - **`language/`**: Archivos de idioma para la plantilla.
+   - **`layouts/`**: Plantillas parciales para componentes (como artículos, menús, etc.).
+
+---
+
+### **2. `atum`**  
+   - **Función**: Plantilla predeterminada para el **backend** (el panel de administración).  
+   - **Ruta**: `templates/atum/`  
+   - **URL en tu repositorio**: [https://github.com/BibiANha/joomla-cms/tree/5.2-dev/templates/atum](https://github.com/BibiANha/joomla-cms/tree/5.2-dev/templates/atum)  
+
+#### **Contenido clave**:
+   - **`index.php`**: Estructura principal del panel de administración.
+   - **`templateDetails.xml`**: Configuración de la plantilla administrativa.
+   - **`css/`**: Estilos para la interfaz de administración.
+   - **`js/`**: Scripts para funcionalidades del backend.
+   - **`layouts/`**: Plantillas para componentes administrativos (como menús, formularios, etc.).
+
+---
+
+## **¿Cómo Funcionan Estas Plantillas en el Frontend y Backend?**
+
+### **Frontend (`cassiopeia`)**:
+- **Responsable de**:  
+  - La estructura visual del sitio (encabezado, menús, contenido principal, pie de página).  
+  - La carga de CSS y JavaScript.  
+  - La integración con módulos y componentes (como artículos, formularios de contacto, etc.).  
+- **Ejemplo**:  
+  Si un usuario visita tu sitio, verá el diseño definido en `cassiopeia`, incluyendo colores, tipografías y disposición de elementos.
+
+### **Backend (`atum`)**:
+- **Responsable de**:  
+  - La interfaz del panel de administración (menús, formularios, tablas, etc.).  
+  - La experiencia de usuario al gestionar contenido, extensiones o configuraciones.  
+- **Ejemplo**:  
+  Cuando editas un artículo o gestionas usuarios, estás viendo la plantilla `atum`.
+
+---
+
+## **Archivos Clave para Personalizar una Plantilla**
+
+Si quieres modificar o crear una plantilla, estos son los archivos más importantes:
+
+### **1. `index.php`**  
+   - Define la estructura HTML y las posiciones de módulos (como `position-1`, `position-2`).  
+   - Ejemplo de código:  
+     ```php
+     <?php
+     // Carga el head (CSS, JS, metadatos)
+     $this->getHead();
+     ?>
+     <body>
+         <header><?php $this->getBlock('header'); ?></header>
+         <main><?php echo $this->getBuffer('component'); ?></main>
+         <footer><?php $this->getBlock('footer'); ?></footer>
+     </body>
+     ```
+
+### **2. `templateDetails.xml`**  
+   - Configura:  
+     - Nombre, autor y versión de la plantilla.  
+     - Posiciones de módulos disponibles.  
+     - Archivos CSS/JS incluidos.  
+   - Ejemplo:  
+     ```xml
+     <extension type="template" version="5.0">
+         <name>cassiopeia</name>
+         <version>5.2.0</version>
+         <positions>
+             <position>position-1</position>
+             <position>position-2</position>
+         </positions>
+         <css>
+             <file>css/template.css</file>
+         </css>
+     </extension>
+     ```
+
+### **3. `css/template.css`**  
+   - Contiene los estilos CSS que definen el diseño de la plantilla.  
+   - Ejemplo:  
+     ```css
+     body {
+         font-family: Arial, sans-serif;
+         background: #f0f0f0;
+     }
+     .container {
+         max-width: 1200px;
+         margin: 0 auto;
+     }
+     ```
+
+---
+
+## **¿Cómo Optimizar una Plantilla?**
+
+Si tu objetivo es optimizar la carga de la página, aquí tienes acciones clave:
+
+### **1. Minimizar CSS y JavaScript**  
+   - Usa herramientas como **Grunt**, **Gulp** o extensiones como **JCH Optimize** para combinar y comprimir archivos.
+
+### **2. Carga Asíncrona/Diferida de Scripts**  
+   - Modifica el `index.php` para cargar scripts de manera asíncrona:  
+     ```php
+     $this->addScriptOptions('script', ['async' => true]);
+     ```
+
+### **3. Eliminar Recursos Innecesarios**  
+   - Si la plantilla incluye CSS/JS de librerías como Bootstrap o jQuery que no usas, elimínalos del `templateDetails.xml`.
+
+### **4. Usar Lazy Loading para Imágenes**  
+   - Agrega el atributo `loading="lazy"` a las imágenes en `index.php`:  
+     ```html
+     <img src="imagen.jpg" alt="Ejemplo" loading="lazy">
+     ```
+
+---
+
+## **¿Qué Sigue?**
+
+Si quieres profundizar en cómo modificar una plantilla específica o necesitas ayuda para optimizar recursos, ¡avísame! Puedo guiarte paso a paso para:
+
+1. Personalizar colores, fuentes o diseños.  
+2. Añadir nuevas posiciones de módulos.  
+3. Integrar funcionalidades avanzadas (como animaciones o APIs).  
+
+¡Estoy aquí para ayudarte a dominar las plantillas de Joomla! 🚀
